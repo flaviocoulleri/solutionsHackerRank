@@ -1,0 +1,12 @@
+select ceiling
+(
+	(select avg(cast(salary as decimal(6,2))) from employees)
+-
+	(
+	select avg(cast(salaryFreeZero as decimal(6,2))) from
+		(select 
+		 cast(replace(cast(salary as varchar(6)),'0','')as int)
+		 as salaryfreezero from employees) as promSalaryFreeZero
+	)
+)
+as realSalary
